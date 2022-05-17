@@ -5,9 +5,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderBottomColor: "#282828",
     borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingVertical: "4%",
+    paddingHorizontal: "2%",
   },
   mcr: {
     flexDirection: "row",
+    paddingVertical: "2%",
   },
   rankc: {
     borderRadius: 8,
@@ -18,7 +21,7 @@ const styles = StyleSheet.create({
   },
   r: {
     color: "white",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "500",
   },
   title: {
@@ -32,21 +35,25 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   coin1: {
+    flex: 0.6,
     marginLeft: 10,
   },
   cp: {
     color: "white",
     fontSize: 20,
+    fontWeight: "600",
   },
   pc: {
-    borderRadius: 5,
-    paddingHorizontal: 15,
-    justifyContent: "center",
     color: "white",
     fontSize: 18,
+    fontWeight: "600",
   },
   coin2: {
-    marginRight: 50,
+    flex: 0.4,
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    marginRight: 10,
   },
 });
 
