@@ -1,19 +1,23 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
-import CoinItem from "./components/CoinItem";
-import cryptocurrencies from "./assets/data/cryptocurrencies.json";
+import { StyleSheet, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import Navigation from "./navigation";
+import WatchlistProvider from "./context/WatchlistContext";
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={cryptocurrencies}
-        renderItem={({ item }) => <CoinItem coin={item} />}
-      />
 
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <WatchlistProvider>
+        <View style={styles.container}>
+          <Navigation />
+          <StatusBar style="auto" />
+        </View>
+      </WatchlistProvider>
+    </NavigationContainer>
+
   );
 }
 
@@ -24,3 +28,5 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
 });
+
+

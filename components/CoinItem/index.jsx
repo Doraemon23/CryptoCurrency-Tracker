@@ -1,9 +1,34 @@
-import react from "react";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import styles from "./styles";
+import { useWatchlist } from "../../context/WatchlistContext";
+function Watchliststar(props) {
+  const {coinId}=props;
+  const { watchlistCoinIds, storeWatchlistCoinId, removeWatchlistCoinId } = useWatchlist();
 
+  const checkIfCoinIsWatchlisted = () =>
+    watchlistCoinIds.some((coinIdValue) => coinIdValue === coinId);
+
+  const handleWatchlistCoin = () => {
+    if (checkIfCoinIsWatchlisted()) {
+      return removeWatchlistCoinId(coinId)
+    }
+    return storeWatchlistCoinId(coinId)
+  };
+  return (
+    <FontAwesome
+      name={checkIfCoinIsWatchlisted() ? "star" : "star-o"}
+      size={25}
+      color={checkIfCoinIsWatchlisted() ? "#FFBF00" : "white"}
+      onPress={handleWatchlistCoin}
+    />
+  )
+}
 export default function CoinItem({ coin }) {
   const {
+    id,
     name,
     symbol,
     image,
@@ -11,9 +36,11 @@ export default function CoinItem({ coin }) {
     market_cap_change_percentage_24h,
     market_cap_rank,
   } = coin;
+
   const c = market_cap_change_percentage_24h < 0 ? "red" : "green";
 
   return (
+
     <View style={styles.cont}>
       <Image
         source={{
@@ -26,6 +53,7 @@ export default function CoinItem({ coin }) {
           alignSelf: "center",
         }}
       />
+
       <View
         style={{
           flex: 1,
@@ -41,10 +69,15 @@ export default function CoinItem({ coin }) {
             </View>
             <View style={{ marginLeft: 15 }}>
               <Text style={styles.symbol}>{symbol.toUpperCase()}</Text>
+
             </View>
+
           </View>
+
         </View>
+        <Watchliststar coinId={id} />
         <View style={styles.coin2}>
+
           <View
             style={{
               flex: 1,
@@ -53,8 +86,11 @@ export default function CoinItem({ coin }) {
               width: "80%",
             }}
           >
+
             <Text style={styles.cp}>$ {current_price}</Text>
+
           </View>
+
           <View
             style={{
               backgroundColor: c,
@@ -64,6 +100,7 @@ export default function CoinItem({ coin }) {
               borderRadius: 4,
             }}
           >
+
             <Text
               style={{
                 ...styles.pc,
@@ -76,4 +113,4 @@ export default function CoinItem({ coin }) {
       </View>
     </View>
   );
-}
+};
